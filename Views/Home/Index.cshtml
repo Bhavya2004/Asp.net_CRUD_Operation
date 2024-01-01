@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/CountDesign.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="row">
+    <!-- Country Panel -->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-file-text fa-4x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class='huge'>@ViewBag.EntityCounts["Country"]</div>
+                                <div class="under-number">Countries</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a  asp-controller="Loc_Country" asp-action="Loc_Country">
+                        <div class="panel-footer">
+                            <span class="pull-left blue">View Details</span>
+                            <span class="pull-right blue"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+    </div>
+
+    <!-- State Panel -->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-comments fa-4x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class='huge'>@ViewBag.EntityCounts["State"]</div>
+                        <div class="under-number">States</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Loc_State" asp-action="Loc_State">
+                <div class="panel-footer">
+                    <span class="pull-left green">View Details</span>
+                    <span class="pull-right green"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- City Panel -->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class='huge'>@ViewBag.EntityCounts["City"]</div>
+                        <div class="under-number"> Cities</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Loc_City" asp-action="Loc_City">
+                <div class="panel-footer">
+                    <span class="pull-left yellow">View Details</span>
+                    <span class="pull-right yellow"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Branch Panel -->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-list fa-4x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class='huge'>@ViewBag.EntityCounts["Branch"]</div>
+                        <div class="under-number">Branches</div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Loc_Branch" asp-action="Loc_Branch">
+                <div class="panel-footer">
+                    <span class="pull-left red">View Details</span>
+                    <span class="pull-right red"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Student Panel -->
+    <div class="col-lg-3 col-md-6">
+    <div class="panel panel-blue">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-graduation-cap fa-4x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <div class='huge'>@ViewBag.EntityCounts["Student"]</div>
+                    <div class="under-number">Students</div>
+                </div>
+            </div>
+        </div>
+        <a asp-area="Student" asp-controller="Student" asp-action="StudentList">
+            <div class="panel-footer">
+                <span class="pull-left blue">View Details</span>
+                <span class="pull-right blue"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+</div>
+
+   

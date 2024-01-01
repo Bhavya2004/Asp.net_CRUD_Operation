@@ -1,0 +1,29 @@
+﻿@using Data_Annotation.Models;
+@model BranchModel
+
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>@TempData["BranchInsertMsg"]</h3>
+		<form method="post" asp-controller="Loc_Branch" asp-action="Save">
+			@Html.HiddenFor(x=>x.BranchId)
+			<div class="form-group">
+				<label>Branch Name</label>
+				<input type="text" asp-for="BranchName" placeholder="Enter Branch Name" />
+			</div>
+			<div class="form-group">
+				<label>Branch Code</label>
+				<input type="text" asp-for="BranchCode" placeholder="Enter Branch Code" />
+			</div>
+			<hr />
+			<input type="submit" />
+			<div class="my-3">
+				<a asp-controller="Loc_Branch" asp-action="Loc_Branch" class="btn btn-primary" style="background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;">Back</a>
+			</div
+		</form>
+	</div>
+</div>

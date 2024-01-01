@@ -1,0 +1,108 @@
+﻿@using System.Data
+@model DataTable
+<style>
+    .search-bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .search-button {
+        margin-left: 10px;
+    }
+</style>
+@{
+    Data_Annotation.Models.LOC_StateFilterModel filterModel = new Data_Annotation.Models.LOC_StateFilterModel();
+}
+<div class="container-fluid border border-dark p-4">
+    <form class="row">
+        <div><h2>Filter</h2></div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group col-4">
+            <label class="form-label">Country Name</label>
+            <div class="">
+                <select class="form-control" asp-for="@filterModel.CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryId","CountryName", ViewBag.SelectedCountryID))">
+                    <option value="">Select Country</option>
+                </select>
+                <span asp-validation-for="@filterModel.CountryID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <lable class="form-label">Select Statename</lable>
+            <input type="text" placeholder="Select Statename" asp-for="@filterModel.StateName" class="form-control mt-2" id="inputAddress">
+        </div>
+        <div class="col-4">
+            <lable class="form-label">Select Statecode</lable>
+            <input type="text" placeholder="Select statecode" asp-for="@filterModel.StateCode" class="form-control mt-2" id="inputAddress">
+        </div>
+        <div class="col my-2">
+            <button type="submit" class="btn btn-primary" asp-controller="Loc_State" asp-action="LOC_StateFilter">
+                Search
+            </button>
+            <form>
+                <button type="submit" class="btn btn-danger" runat="server" OnClientClick="this.form.reset();return false;">clear</button>
+            </form>
+        </div>
+    </form>
+    
+</div>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>State List</h1>
+        <a class="btn btn-success" href="@Url.Action("AddState", "Loc_State")">Add State</a>
+    </div>
+
+    @*Search Bar*@
+    <div class="search-bar">
+        <input class="search-input" type="text" id="sample_1" placeholder="Search...">
+        <button class="btn btn-primary search-button">Search</button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">State ID</th>
+                <th scope="col" class="text-center">Country Name</th>
+                <th scope="col" class="text-center">State Name</th>
+                <th scope="col" class="text-center">State Code</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sample_2">
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <tr>
+                    <td class="text-center">@dr["StateID"]</td>
+                    <td class="text-center">@dr["CountryName"]</td>
+                    <td class="text-center">@dr["StateName"]</td>
+                    <td class="text-center">@dr["StateCode"]</td>
+                    <td class="text-center">
+                        <a class="btn btn-primary" href="@Url.Action("AddState", "Loc_State", new { Stateid = dr["StateID"] })">Edit</a>
+                        <a class="btn btn-danger" href="@Url.Action("DeleteState", "Loc_State", new { id = dr["StateID"] })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            $("#sample_1").on("keyup",function(){
+                var value=$(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function(){
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,13 @@
+﻿@using System.Data
+@model DataRow
+
+<h2>Edit Country</h2>
+
+<form method="post" action="@Url.Action("UpdateCountry", "Loc_Country")">
+    <input type="hidden" name="CountryID" value="@Model["CountryID"]" />
+    <label>Country Name:</label>
+    <input type="text" name="CountryName" value="@Model["CountryName"]" /><br />
+    <label>Country Code:</label>
+    <input type="text" name="CountryCode" value="@Model["CountryCode"]" /><br />
+    <input type="submit" value="Update"   />
+</form>

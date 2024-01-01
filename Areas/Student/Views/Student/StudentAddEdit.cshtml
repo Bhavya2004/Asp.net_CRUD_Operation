@@ -1,0 +1,62 @@
+﻿@using Data_Annotation.Models;
+@model StudentModel
+
+
+<div class="row">
+	<div class="col-md-12">
+		@*<h3>@TempData["StudentInsertMsg"]</h3>*@
+		<form method="post" asp-area="Student" asp-controller="Student" asp-action="Save">
+			@Html.HiddenFor(x=>x.StudentID)
+			<div class="form-group">
+				<label>Student Name</label>
+				<input type="text" asp-for="StudentName" placeholder="Enter student Name" />
+			</div>
+			<div class="form-group">
+				<label>Student Mobile No.</label>
+				<input type="text" asp-for="MobileNoStudent" placeholder="Enter Student Mobile" />
+			</div>
+			<div class="form-group">
+				<label>Student Email</label>
+				<input type="text" asp-for="Email" placeholder="Enter Student Email" />
+			</div>
+			<div class="form-group">
+				<label>Father's Mobile No.</label>
+				<input type="text" asp-for="MobileNoFather" placeholder="Enter Father Mobile" />
+			</div>
+			<div class="form-group">
+				<label>Student Address</label>
+				<input type="text" asp-for="Address" placeholder="Enter Student Address" />
+			</div>
+			<div class="form-group">
+				<label>Student BirthDate</label>
+				<input type="text" asp-for="BirthDate" placeholder="Enter Student BirthDate" />
+			</div>
+			<div class="form-group">
+				<label>Student Age</label>
+				<input type="text" asp-for="Age" placeholder="Enter Student Age" />
+			</div>
+			<div class="form-group">
+				<label>Student IsActive</label>
+				<input type="text" asp-for="IsActive" placeholder="Enter Student IsActive" />
+			</div>
+			<div class="form-group">
+				<label>Student Gender</label>
+				<input type="text" asp-for="Gender" placeholder="Enter Student Gender" />
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="text" class="form-control" asp-for="Password" />
+			</div>
+			<div class="form-group">
+				<label>BranchID</label>
+				<input type="text" asp-for="BranchID" placeholder="Enter BranchID" />
+			</div>
+			<div class="form-group">
+				<label>CityID</label>
+				<input type="text" asp-for="CityID" placeholder="Enter CityID" />
+			</div>
+			<hr />
+			<input type="submit" />
+		</form>
+	</div>
+</div>

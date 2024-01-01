@@ -1,0 +1,82 @@
+﻿@*@using Data_Annotation.Models;*@
+@using CRUD_with_sql.Models;
+@model CityModel
+
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>@TempData["CityInsertMsg"]</h3>
+		<form method="post" asp-controller="Loc_City" asp-action="Save">
+			@Html.HiddenFor(x=>x.CityId)
+			@*dropdown for Country*@
+			<div class="form-group">
+				<label>Country Name</label>
+				<select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryId","CountryName"))" onchange="automaticState();">
+					<option value="">Select Country</option>
+				</select>
+			</div>
+
+			@*dropdown for State*@
+			<div class="form-group">
+				<label>State Name</label>
+				<select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateId","StateName"))">
+					<option value="">Select State</option>
+				</select>
+			</div>
+
+			
+
+			<div class="form-group">
+				<label>City Name</label>
+				<input type="text" asp-for="CityName" placeholder="Enter State Name" />
+			</div>
+			<div class="form-group">
+				<label>City Code</label>
+				<input type="text" asp-for="CityCode" placeholder="Enter State Code" />
+			</div>
+			<hr />
+			<input type="submit" />
+			<div class="my-3">
+				<a asp-controller="Loc_City" asp-action="Loc_City" class="btn btn-primary" style="background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;">Back</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script>
+	function automaticState(){
+		var CountryID = $("#CountryID").val();
+
+		if(CountryID !== ""){
+			$("#StateID").empty();
+			$("#StateID").append($("<option></option>").val("").html("Select State"));
+			$.ajax(
+				{
+					type:"POST",
+					contentType:"application/json; charset=utf-8",
+					url: "@Url.Action("DropdownByCountry","LOC_City")" + "?&CountryID=" + CountryID,
+					data:{},
+					dataType:"json",
+					success:function (Result){
+						$.each(Result,
+							function(key,value){
+								$("#StateID").append($("<option></option>").val(value.stateId).html(value.stateName));
+							}
+						)
+					},
+					error: function (r){
+						alert("Error While Loading Dropdown.");
+					}
+				}
+			);
+		}
+		else{
+			$("#StateID").empty();
+			$("#StateID").append($("<option></option>").val("").html("Select State"));
+		}
+	}
+</script>

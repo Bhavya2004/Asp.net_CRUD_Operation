@@ -1,0 +1,30 @@
+﻿@using Data_Annotation.Models;
+@model CountryModel
+
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>@TempData["CountryInsertMsg"]</h3>
+		<form method="post" asp-controller="Loc_Country" asp-action="Save">
+			@Html.HiddenFor(x=>x.CountryId)
+			<div class="form-group">
+				<label>Country Name</label>
+				<input type="text" asp-for="CountryName" placeholder="Enter Country Name" />
+			</div>
+			<div class="form-group">
+				<label>Country Code</label>
+				<input type="text" asp-for="CountryCode" placeholder="Enter Country Code" />
+			</div>
+			
+			<hr/>
+			<input type="submit"/>
+			<div class="my-3">
+			<a asp-controller="Loc_Country" asp-action="Loc_Country" class="btn btn-primary" style="background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;">Back</a>
+			</div>
+		</form>
+	</div>
+</div>

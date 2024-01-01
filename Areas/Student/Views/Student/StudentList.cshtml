@@ -1,0 +1,95 @@
+﻿
+@using System.Data
+@model DataTable
+<style>
+    .search-bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .search-button {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>student List</h1>
+        <a class="btn btn-success" href="@Url.Action("AddStudent", "Student")">Add Student</a>
+    </div>
+
+    @*Search Bar*@
+    <div class="search-bar">
+        <input class="search-input" type="text" id="sample_1" placeholder="Search...">
+        <button class="btn btn-primary search-button">Search</button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Student ID</th>
+                <th scope="col" class="text-center">Student Name</th>
+                <th scope="col" class="text-center">MobileNoStudent</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">MobileNoFather</th>
+                <th scope="col" class="text-center">Address</th>
+                <th scope="col" class="text-center">BirthDate</th>
+                <th scope="col" class="text-center">Age</th>
+                <th scope="col" class="text-center">Is Active</th>
+                <th scope="col" class="text-center">Gender</th>
+                <th scope="col" class="text-center">Branch Name</th>
+                <th scope="col" class="text-center">City Name</th>
+                <th scope="col" class="text-center">Created</th>
+                <th scope="col" class="text-center">Modified</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sample_2">
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <tr>
+                    <td class="text-center">@dr["StudentID"]</td>
+                    <td class="text-center">@dr["StudentName"]</td>
+                    <td class="text-center">@dr["MobileNoStudent"]</td>
+                    <td class="text-center">@dr["Email"]</td>
+                    <td class="text-center">@dr["MobileNoFather"]</td>
+                    <td class="text-center">@dr["Address"]</td>
+                    <td class="text-center">@dr["BirthDate"]</td>
+                    <td class="text-center">@dr["Age"]</td>
+                    <td class="text-center">@dr["IsActive"]</td>
+                    <td class="text-center">@dr["Gender"]</td>
+                    <td class="text-center">@dr["BranchName"]</td>
+                    <td class="text-center">@dr["CityName"]</td>
+                    <td class="text-center">@dr["Created"]</td>
+                    <td class="text-center">@dr["Modified"]</td>
+                    <td class="text-center">
+                        <a class="btn btn-primary" href="@Url.Action("AddStudent", "Student", new { StudentId = dr["StudentID"] })">Edit</a>
+                        <a class="btn btn-danger" href="@Url.Action("DeleteStudent", "Student", new { id = dr["StudentID"] })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
